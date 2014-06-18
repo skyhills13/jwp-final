@@ -59,6 +59,8 @@ public class FrontController extends HttpServlet {
 	String urlExceptParameter(String forwardUrl) {
 		int index = forwardUrl.indexOf("?");
 		if (index > 0) {
+			logger.info("index"+index);
+			logger.info("return value"+ forwardUrl.substring(0, index));
 			return forwardUrl.substring(0, index);
 		}
 		
