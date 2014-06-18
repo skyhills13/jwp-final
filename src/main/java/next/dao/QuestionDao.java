@@ -44,8 +44,7 @@ public class QuestionDao {
 		ResultSet rs = null;
 		try {
 			con = ConnectionManager.getConnection();
-			String sql = "SELECT questionId, writer, title, createdDate, countOfComment FROM QUESTIONS " + 
-					"order by questionId desc";
+			String sql = createQueryForFindAll();
 			pstmt = con.prepareStatement(sql);
 
 			rs = pstmt.executeQuery();
@@ -83,8 +82,7 @@ public class QuestionDao {
 		ResultSet rs = null;
 		try {
 			con = ConnectionManager.getConnection();
-			String sql = "SELECT questionId, writer, title, contents, createdDate, countOfComment FROM QUESTIONS " + 
-					"WHERE questionId = ?";
+			String sql = createQueryForFindById();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setLong(1, questionId);
 
@@ -114,6 +112,15 @@ public class QuestionDao {
 			}
 		}
 	}
+	
+	public String createQueryForFindById(){
+		return "SELECT questionId, writer, title, contents, createdDate, countOfComment FROM QUESTIONS WHERE questionId = ?";
+	}
+	
+	public String createQueryForFindAll(){
+		return "SELECT questionId, writer, title, createdDate, countOfComment FROM QUESTIONS order by questionId desc";
+	}
+	
 	
 	public void updateCountOfComment(Question question) throws SQLException{
 		Connection con = null;

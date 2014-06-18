@@ -25,9 +25,9 @@ public class CommentController implements Controller {
 		AnswerDao answerDao = new AnswerDao();
 		Question question;
 		
-		long questionId = (long)ServletRequestUtils.getIntParameter(request, "questionId");
-		String writer = ServletRequestUtils.getStringParameterFromPart(request, "writer");
-		String contents = ServletRequestUtils.getStringParameterFromPart(request, "contents");
+		long questionId = Long.parseLong(request.getParameter("questionId"));
+		String writer = request.getParameter("writer");
+		String contents = request.getParameter("contents");
 
 		Answer answer = new Answer(writer, contents, questionId);
 		answerDao.insert(answer);

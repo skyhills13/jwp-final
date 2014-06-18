@@ -49,10 +49,10 @@
     
     <!-- comments start -->
 	<div class="comments">
-	<c:forEach items="${answers}" var ="answer">
 	    <h3>
 	        댓글 수 : ${question.countOfComment}
 	    </h3>
+	<c:forEach items="${answers}" var ="answer">
 	        <div class="comment">
 	            <div class="comment-metadata">
 	                <span class="comment-author">${answer.writer}</span>
