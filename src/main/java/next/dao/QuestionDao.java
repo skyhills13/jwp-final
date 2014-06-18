@@ -84,8 +84,9 @@ public class QuestionDao {
 			con = ConnectionManager.getConnection();
 			String sql = createQueryForFindById();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setLong(1, questionId);
-
+			
+			setValueForFindById(questionId, pstmt);
+			
 			rs = pstmt.executeQuery();
 
 			Question question = null;
@@ -113,14 +114,17 @@ public class QuestionDao {
 		}
 	}
 	
-	public String createQueryForFindById(){
+	private String createQueryForFindById(){
 		return "SELECT questionId, writer, title, contents, createdDate, countOfComment FROM QUESTIONS WHERE questionId = ?";
 	}
 	
-	public String createQueryForFindAll(){
+	private String createQueryForFindAll(){
 		return "SELECT questionId, writer, title, createdDate, countOfComment FROM QUESTIONS order by questionId desc";
 	}
 	
+	private void setValueForFindById (long questionId, PreparedStatement pstmt) throws SQLException {
+		pstmt.setLong(1, questionId);
+	}
 	
 	public void updateCountOfComment(Question question) throws SQLException{
 		Connection con = null;
