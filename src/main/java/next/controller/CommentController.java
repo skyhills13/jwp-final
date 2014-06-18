@@ -16,12 +16,15 @@ public class CommentController implements Controller {
 			HttpServletResponse response) throws Exception {
 		
 		QuestionDao questionDao = new QuestionDao();
-		AnswerDao ansswerDao = new AnswerDao();
+		AnswerDao answerDao = new AnswerDao();
 		Question question;
 		Answer answer;
 		
+		request.getp
+		
 		long questionId = Long.parseLong(request.getParameter("questionId"));
 		question = questionDao.findById(questionId);
+		questionDao.updateCountOfComment(question);
 
 		
 		return "redirect:/";
