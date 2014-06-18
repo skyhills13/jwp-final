@@ -8,8 +8,14 @@ function writeAnswers(e) {
 	 
 	 var answerForm = e.currentTarget.form;
 	 var url = "/api/addanswer.next";
+	 var oParameters = {
+			 "questionId" : answerForm[0].value, 
+			 "writer" : answerForm[1].value, 
+			 "contents" : answerForm[2].value
+	 }
 	 var params = "questionId=" + answerForm[0].value + "&writer=" + answerForm[1].value + "&contents=" + answerForm[2].value;
 
+	 
 	 var request = new XMLHttpRequest();
 	 request.open("POST", url, true);
 	 request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
@@ -19,6 +25,16 @@ function writeAnswers(e) {
 			 location.reload(true);
 		 }
 	 }
+	 var formData = new FormData();
 	 
-	 request.send(params);
+	 for (var key in oParameters){
+		 //hasOwnProperty is used to check if your target really have that property, 
+		 //rather than have it inherited from its prototype. A bit simplier would be
+		 if (oParameters.hasOwnProperty(key)) {
+			 formData.append(key, oParameters[key]);
+		 }
+	 }
+	 
+	 request.send(formData);
+	 //request.send(params);
 }
